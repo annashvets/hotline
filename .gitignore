@@ -1,0 +1,5 @@
+# Ignore content of these folders
+#################################
+
+node_modules/
+package-lock.json
