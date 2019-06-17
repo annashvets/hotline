@@ -4,26 +4,21 @@ let userNameLocator = ".item-login .name";
 class MainPage{
     constructor(){
 
+        this.loginButton = element(by.css(loginButtonLocator));
+        this.userName = element(by.css(userNameLocator));
+
     }
 
     async open(){
         await browser.get('https://hotline.ua/');
     }
 
-    getLoginButton(){
-        return element(by.css(loginButtonLocator));
-    }
-
-    getUserName(){
-        return element(by.css(userNameLocator));
-    }
-
     async clickLoginButton(){
-        await this.getLoginButton().click();
+        await this.loginButton.click();
     }
 
     async verifyUserName(){
-        return this.getUserName().getText();
+        return this.userName.getText();
     }
 
 

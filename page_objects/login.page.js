@@ -5,26 +5,19 @@ let submitButtonLocator = ".btn-graphite";
 class LoginPage { 
     constructor (){
 
+        this.emailInput = element(by.css(emailInputLocator));
+        this.passInput = element(by.css(passInputLocator));
+        this.submitButton = element(by.css(submitButtonLocator));
+
     }
-getEmailInput(){
-    return element(by.css(emailInputLocator));
-}
-
-getSubmitButton(){
-    return element(by.css(submitButtonLocator));
-}
-
-getPassInput(){
-    return element(by.css(passInputLocator));
-}
 
 async login(email, pass){
-    await this.getEmailInput().sendKeys(email);
-    await this.getPassInput().sendKeys(pass);
+    await this.emailInput.sendKeys(email);
+    await this.passInput.sendKeys(pass);
 }
 
 async clickSubmit(){
-    await this.getSubmitButton().click();
+    await this.submitButton.click();
 }
 
 }
