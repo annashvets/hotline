@@ -1,17 +1,18 @@
-describe("Hotline login", function() {
-    it("Successfull login", function() {
-      
-      browser.get('https://hotline.ua/');
+const MainPage = require("./page_objects/main.page");
+const LoginPage = require("./page_objects/login.page");
 
-      
+let mainPage = new MainPage();
+let loginPage = new LoginPage();
 
-      element(by.css(".item-login a")).click();
-      element(by.css(".form-item [type='email']")).sendKeys("solovko_av@ukr.net");
-      element(by.css(".form-item [type='password']")).sendKeys("0682326605");
+describe("Hotline login", () => {
+    it("Successfull login", async () => {
+      
+      await mainPage.open();
+      await mainPage.clickLoginButton();
+      await loginPage.login("solovko_av@ukr.net", "0682326605");
+      await loginPage.clickSubmit();
+      expect(await mainPage.verifyUserName()).toEqual("shanna");
     
-      element(by.css(".btn-graphite")).click();
-
-      expect(element(by.css(".item-login .name")).getText()).toEqual('shanna');
       });
 
   });
