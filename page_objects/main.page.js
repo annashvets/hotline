@@ -1,12 +1,17 @@
+let BasePage = require("./base.page");
+let Button = require("../elements/button.element");
+
 let loginButtonLocator = ".item-login a";
 let userNameLocator = ".item-login .name";
 
-class MainPage{
-    constructor(){
+class MainPage extends BasePage{
+    
+    getLoginButton(){
+        return new Button(element(by.css(loginButtonLocator)), "Login button");
+    }
 
-        this.loginButton = element(by.css(loginButtonLocator));
-        this.userName = element(by.css(userNameLocator));
-
+    getUserName(){
+        return new Button(element(by.css(userNameLocator)), "User name");
     }
 
     async open(){
@@ -14,14 +19,14 @@ class MainPage{
     }
 
     async clickLoginButton(){
-        await this.loginButton.click();
+        await this.getLoginButton().click();
     }
 
     async verifyUserName(){
-        return this.userName.getText();
+        return this.getUserName().getText();
     }
 
 
 }
 
-module.exports = MainPage;
+module.exports = new MainPage();

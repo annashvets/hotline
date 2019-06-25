@@ -1,25 +1,33 @@
+let BasePage = require("./base.page");
+let Button = require("../elements/button.element");
+
 let emailInputLocator = ".form-item [type='email']";
 let passInputLocator = ".form-item [type='password']";
 let submitButtonLocator = ".btn-graphite";
 
-class LoginPage { 
-    constructor (){
+class LoginPage extends BasePage{ 
 
-        this.emailInput = element(by.css(emailInputLocator));
-        this.passInput = element(by.css(passInputLocator));
-        this.submitButton = element(by.css(submitButtonLocator));
-
+    getEmailInput(){
+        return new Button(element(by.css(emailInputLocator)), "Email Input");
     }
 
-async login(email, pass){
-    await this.emailInput.sendKeys(email);
-    await this.passInput.sendKeys(pass);
+    getPassInput(){
+        return new Button(element(by.css(passInputLocator)), "Password Input");
+    }
+
+    getSubmitButton(){
+        return new Button(element(by.css(submitButtonLocator)), "Submit button");
+    }
+
+    async login(email, pass){
+        await this.getEmailInput().sendKeys(email);
+        await this.getPassInput().sendKeys(pass);
+    }
+
+    async clickSubmit(){
+        await this.getSubmitButton().click();
+    }
+    
 }
 
-async clickSubmit(){
-    await this.submitButton.click();
-}
-
-}
-
-module.exports = LoginPage;
+module.exports = new LoginPage();

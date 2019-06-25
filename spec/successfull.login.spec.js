@@ -1,8 +1,5 @@
-const MainPage = require("./page_objects/main.page");
-const LoginPage = require("./page_objects/login.page");
-
-let mainPage = new MainPage();
-let loginPage = new LoginPage();
+const mainPage = require("../page_objects/main.page");
+const loginPage = require("../page_objects/login.page");
 
 describe("Hotline login", () => {
     it("Successfull login", async () => {
