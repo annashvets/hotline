@@ -15,17 +15,22 @@ class MainPage extends BasePage{
     }
 
     async open(){
-        await browser.get('https://hotline.ua/');
+        await allure.createStep("Open Hotline page", async () => {
+            await browser.get('https://hotline.ua/');
+        })();
     }
 
     async clickLoginButton(){
-        await this.getLoginButton().click();
+        await allure.createStep("Click Login button", async () => {
+            await this.getLoginButton().click();
+        })();
     }
 
     async verifyUserName(){
-        return this.getUserName().getText();
+        return await allure.createStep("Verify user name", async () => {
+        return await this.getUserName().getText();
+        })();
     }
-
 
 }
 
