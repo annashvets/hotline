@@ -1,5 +1,6 @@
 let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
+let Input = require("../elements/input.element");
 
 let emailInputLocator = ".form-item [type='email']";
 let passInputLocator = ".form-item [type='password']";
@@ -8,11 +9,11 @@ let submitButtonLocator = ".btn-graphite";
 class LoginPage extends BasePage{ 
 
     getEmailInput(){
-        return new Button(element(by.css(emailInputLocator)), "Email Input");
+        return new Input(element(by.css(emailInputLocator)), "Email Input");
     }
 
     getPassInput(){
-        return new Button(element(by.css(passInputLocator)), "Password Input");
+        return new Input(element(by.css(passInputLocator)), "Password Input");
     }
 
     getSubmitButton(){
@@ -20,12 +21,16 @@ class LoginPage extends BasePage{
     }
 
     async login(email, pass){
-        await this.getEmailInput().sendKeys(email);
-        await this.getPassInput().sendKeys(pass);
+        await allure.createStep(`Enter user name ${email} and password ${pass}`, async () => {
+            await this.getEmailInput().sendKeys(email);
+            await this.getPassInput().sendKeys(pass);
+        })();
     }
 
     async clickSubmit(){
-        await this.getSubmitButton().click();
+        await allure.createStep("Click on Submit button", async () => {
+            await this.getSubmitButton().click();
+        })();
     }
     
 }
