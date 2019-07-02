@@ -4,17 +4,16 @@ let Button = require("../elements/button.element");
 let loginButtonLocator = ".item-login a";
 let userNameLocator = ".item-login .name";
 
-class MainPage extends BasePage{
-    
-    getLoginButton(){
+class MainPage extends BasePage {
+    getLoginButton() {
         return new Button(element(by.css(loginButtonLocator)), "Login button");
     }
 
-    getUserName(){
+    getUserName() {
         return new Button(element(by.css(userNameLocator)), "User name");
     }
 
-    async open(){
+    async open() {
         await allure.createStep("Open Hotline page", async () => {
             await browser.get('https://hotline.ua/');
         })();
