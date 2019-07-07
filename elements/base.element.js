@@ -1,23 +1,21 @@
-class BaseElement{
-    constructor(protractorElement, name){
+class BaseElement {
+    constructor(protractorElement, name) {
         this.protractorElement = protractorElement;
         this.elementName = name;
     }
 
-    getProtractorElement(){
+    getProtractorElement() {
         return this.protractorElement;
     }
 
-    async click(){
+    async click() {
         console.log(`Click on ${this.elementName}`);
         await this.protractorElement.click();
     }
 
-    async getText(){
+    async getText() {
         return await this.protractorElement.getText();
     }
-
-
 }
 
 module.exports = BaseElement;

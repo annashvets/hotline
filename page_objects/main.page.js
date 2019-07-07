@@ -19,18 +19,15 @@ class MainPage extends BasePage {
         })();
     }
 
-    async clickLoginButton(){
+    async clickLoginButton() {
         await allure.createStep("Click Login button", async () => {
             await this.getLoginButton().click();
         })();
     }
 
-    async verifyUserName(){
-        return await allure.createStep("Verify user name", async () => {
-        return await this.getUserName().getText();
-        })();
+    async verifyUserName() {
+        return await allure.createStep("Verify user name", async () => await this.getUserName().getText())();
     }
-
 }
 
 module.exports = new MainPage();
