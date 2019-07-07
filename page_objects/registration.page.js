@@ -7,6 +7,9 @@ let regEmailInputLocator = "#reg-form [type='email']";
 let nickInputLocator = "#reg-form [type='text']";
 let regPassInputLocator = "#reg-form [type='password']";
 let registrationButtonLocator = "#submit-button";
+let regEmailFieldErrorLocator = `[type = "email"] + div .errors`;
+let regPassFieldErrorLocator = `[type = "password"] + div .errors`;
+
 
 class RegistrationPage extends BasePage {
     getRegEmailInput() {
@@ -25,6 +28,14 @@ class RegistrationPage extends BasePage {
         return new Button(element(by.css(registrationButtonLocator)), "Registration Button");
     }
 
+    getRegEmailFieldError() {
+        return new Input(element(by.css(regEmailFieldErrorLocator)), "Email field error");
+    }
+
+    getRegPassFieldError() {
+        return new Input(element(by.css(regPassFieldErrorLocator)), "Pass field error");
+    }
+
     async register(password) {
         let timeStamp = Math.floor(Date.now() / 1000);
         let regEmail = `autotshvets+${timeStamp}@gmail.com`;
@@ -40,6 +51,25 @@ class RegistrationPage extends BasePage {
         await allure.createStep("Click Registartion Button", async () => {
             await this.getRegistrationButton().click();
         })();
+    }
+
+    async verifyRegEmailFieldError() {
+        return await allure.createStep("Check Email field error", async () => await
+        this.getRegEmailFieldError().getText())();
+    }
+
+    async enterRegInvalidEmail(invalidEmail) {
+        await allure.createStep(`Enter incorrect email - ${invalidEmail}`, async () => await
+        this.getRegEmailInput().sendKeys(invalidEmail))();
+    }
+
+    async cleareRegEmailInput() {
+        await this.getRegEmailInput().clear();
+    }
+
+    async verifyRegPassFieldError() {
+        return await allure.createStep("Check Pass field error", async () => await
+        this.getRegPassFieldError().getText())();
     }
 }
 

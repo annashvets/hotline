@@ -16,6 +16,10 @@ class BaseElement {
     async getText() {
         return await this.protractorElement.getText();
     }
+
+    async clear() {
+        await this.protractorElement.clear();
+    }
 }
 
 module.exports = BaseElement;
