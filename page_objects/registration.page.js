@@ -25,13 +25,10 @@ class RegistrationPage extends BasePage {
         return new Button(element(by.css(registrationButtonLocator)), "Registration Button");
     }
 
-    async register(password) {
-        let timeStamp = Math.floor(Date.now() / 1000);
-        let regEmail = `autotshvets+${timeStamp}@gmail.com`;
-        let regNick = `autotshvets${timeStamp}`;
-        await allure.createStep(`Enter email - ${regEmail}, nick - ${regNick} and password - ${password}`, async () => {
-            await this.getRegEmailInput().sendKeys(regEmail);
-            await this.getNickInput().sendKeys(regNick);
+    async register(email, nick, password) {
+        await allure.createStep(`Enter email - ${email}, nick - ${nick} and password - ${password}`, async () => {
+            await this.getRegEmailInput().sendKeys(email);
+            await this.getNickInput().sendKeys(nick);
             await this.getRegPassInput().sendKeys(password);
         })();
     }
