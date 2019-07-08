@@ -2,11 +2,11 @@ const mainPage = require("../../page_objects/main.page");
 const loginPage = require("../../page_objects/login.page");
 const registrationPage = require("../../page_objects/registration.page");
 
-describe("Hotline registration", () => {
-    beforeAll(async function () {
-       await browser.restart();
-       browser.waitForAngularEnabled(false);
-      });
+xdescribe("Hotline registration", () => {
+    beforeAll(async () => {
+        await browser.restart();
+        browser.waitForAngularEnabled(false);
+    });
     it("Unsuccessfull registration - epmty email", async () => {
         await mainPage.open();
         await mainPage.clickLoginButton();

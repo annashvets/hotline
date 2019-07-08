@@ -3,10 +3,10 @@ const loginPage = require("../../page_objects/login.page");
 const registrationPage = require("../../page_objects/registration.page");
 
 describe("Hotline registration", () => {
-    beforeAll(async function () {
-       await browser.restart();
-       browser.waitForAngularEnabled(false);
-      });
+    /*beforeAll(async () => {
+        await browser.restart();
+        browser.waitForAngularEnabled(false);
+    });*/
     it("Successfull registration", async () => {
         await mainPage.open();
         await mainPage.clickLoginButton();
