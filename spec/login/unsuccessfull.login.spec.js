@@ -3,11 +3,6 @@ const mainPage = require("../../page_objects/main.page");
 const loginPage = require("../../page_objects/login.page");
 
 describe("Hotline login", () => {
-    beforeAll(async () => {
-        await browser.restart();
-        browser.waitForAngularEnabled(false);
-    });
-
     it("Unsuccessfull login - password field is empty", async () => {
         await mainPage.open();
         await mainPage.clickLoginButton();
