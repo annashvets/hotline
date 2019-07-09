@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
 let Input = require("../elements/input.element");

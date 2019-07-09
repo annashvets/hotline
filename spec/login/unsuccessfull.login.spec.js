@@ -1,7 +1,8 @@
+/* eslint-disable max-len */
 const mainPage = require("../../page_objects/main.page");
 const loginPage = require("../../page_objects/login.page");
 
-xdescribe("Hotline login", () => {
+describe("Hotline login", () => {
     beforeAll(async () => {
         await browser.restart();
         browser.waitForAngularEnabled(false);
