@@ -3,11 +3,20 @@ const AllureReporter = require('jasmine-allure-reporter');
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['spec/**/*.js'],
+    specs: ['spec/login/*.js'],
 
     jasmineNodeOpts: {
         defaultTimeoutInterval: 30 * 1000
     },
+
+    capabilities: {
+        shardTestFiles: true,
+        browserName: 'chrome',
+        chromeOptions: {
+            args: ["--window-size=1280,780"]
+        }
+    },
+
     maxInstances: 1,
     SELENIUM_PROMISE_MANAGER: false,
     onPrepare: async () => {
@@ -19,8 +28,6 @@ exports.config = {
         jasmine.getEnv().afterEach(async () => {
             let screen = await browser.takeScreenshot();
             await allure.createAttachment("Screenshot", () => Buffer.from(screen, "base64"), `image/png`)();
-            await browser.restart();
-            browser.waitForAngularEnabled(false);
         });
     }
 };
