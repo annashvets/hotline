@@ -2,6 +2,7 @@
 let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
 let Input = require("../elements/input.element");
+let View = require("../elements/view.element");
 
 let loginButtonLocator = ".item-login a";
 let userNameLocator = ".item-login .name";
@@ -24,11 +25,11 @@ class MainPage extends BasePage {
     }
 
     getSearchFirstItem() {
-        return new Input(element(by.css(searchFirstItemLocator)), "First item in search list");
+        return new View(element(by.css(searchFirstItemLocator)), "First item in search list");
     }
 
     getSearchResultFirstItem() {
-        return new Button(element(by.css(searchResultLocator)), "Search result first item");
+        return new View(element(by.css(searchResultLocator)), "Search result first item");
     }
 
     async open() {
@@ -54,7 +55,7 @@ class MainPage extends BasePage {
     }
 
     async clickSearchFirstItem() {
-        await browser.wait(EC.visibilityOf($("#live-search > ul li:nth-of-type(1)")), 3000);
+        await browser.wait(EC.visibilityOf(this.getSearchFirstItem().getProtractorElement()), 3000);
         await allure.createStep("Select first item in search list", async () => {
             await this.getSearchFirstItem().click();
         })();

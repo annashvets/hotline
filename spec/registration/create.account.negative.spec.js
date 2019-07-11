@@ -27,7 +27,7 @@ describe("Hotline registration", () => {
 
     it("Unsuccessfull registartion - password is invalid", async () => {
         await registrationPage.cleareRegEmailInput();
-        await registrationPage.register("1");
+        await registrationPage.register("", "", "23");
         await registrationPage.clickRegistration();
         expect(await registrationPage.verifyRegPassFieldError()).toEqual("Длина поля не может быть меньше 4 и больше 16 символов");
     });
