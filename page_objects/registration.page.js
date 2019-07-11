@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
 let Input = require("../elements/input.element");
@@ -51,13 +52,13 @@ class RegistrationPage extends BasePage {
     }
 
     async verifyRegEmailFieldError() {
-        return await allure.createStep("Check Email field error", async () => await
-        this.getRegEmailFieldError().getText())();
+        return await allure.createStep("Check Email field error", async () => await this.getRegEmailFieldError().getText())();
     }
 
     async enterRegInvalidEmail(invalidEmail) {
-        await allure.createStep(`Enter incorrect email - ${invalidEmail}`, async () => await
-        this.getRegEmailInput().sendKeys(invalidEmail))();
+        await allure.createStep(`Enter incorrect email - ${invalidEmail}`, async () => {
+            await this.getRegEmailInput().sendKeys(invalidEmail);
+        })();
     }
 
     async cleareRegEmailInput() {
@@ -65,8 +66,7 @@ class RegistrationPage extends BasePage {
     }
 
     async verifyRegPassFieldError() {
-        return await allure.createStep("Check Pass field error", async () => await
-        this.getRegPassFieldError().getText())();
+        return await allure.createStep("Check Pass field error", async () => await this.getRegPassFieldError().getText())();
     }
 }
 
