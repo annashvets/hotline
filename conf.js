@@ -13,13 +13,14 @@ exports.config = {
         shardTestFiles: true,
         browserName: 'chrome',
         chromeOptions: {
-            args: ["--window-size=1280,780"]
+            args: ["--window-size=1280,880"]
         }
     },
 
     maxInstances: 1,
     SELENIUM_PROMISE_MANAGER: false,
     onPrepare: async () => {
+        await browser.manage().setTimeouts({ implicit: 6000 });
         await browser.waitForAngularEnabled(false);
         jasmine.getEnv().addReporter(new AllureReporter({
             resultsDir: 'allure-results'
