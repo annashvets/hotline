@@ -1,24 +1,15 @@
 let BaseElement = require("./base.element");
 
 class Checkbox extends BaseElement {
-    async isChecked() {
-        console.log("Verifying if checkbox is checked");
-        if (await this.protractorElement.getAttribute('checked') === true) {
-            return true;
-        } return false;
-    }
-
     async check() {
-        let verify = this.isChecked();
-        if (await verify === true) {
+        if (await this.isChecked()) {
             console.log("Checkbox is checked");
-        } else await this.protractorElement.click();
+        } else await this.click();
     }
 
     async uncheck() {
-        let verify = this.isChecked();
-        if (await verify === true) {
-            await this.protractorElement.click();
+        if (await this.isChecked()) {
+            await this.click();
         } else console.log("Checkbox is unchecked");
     }
 }

@@ -17,10 +17,8 @@ describe("Hotline - Buy goods", () => {
         await productListPage.checkCheckbox();
         await productListPage.clicAddToChart();
         await itemPage.clickBuyNowButton();
-        await basketPage.openWayofDeliveryDropDown();
-        await basketPage.selectWayOfDeiveryItem();
-        await basketPage.openNovaPoshtaDropDown();
-        await basketPage.selectItemNovaPoshtaDropDown();
+        await basketPage.openWayofDeliveryDropDown(`"До склада"`);
+        await basketPage.openNovaPoshtaDropDown(`"Пластова"`);
         await basketPage.clickOrderButton();
         expect(await checkoutPage.verifyCheckoutHeader()).toContain("Оформление и оплата вашего заказа");
     });

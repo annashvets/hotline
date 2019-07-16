@@ -20,6 +20,13 @@ class BaseElement {
     async clear() {
         await this.protractorElement.clear();
     }
+
+    async isChecked() {
+        console.log("Verifying if checkbox is checked");
+        if (await this.protractorElement.getAttribute('checked')) {
+            return true;
+        } return false;
+    }
 }
 
 module.exports = BaseElement;
