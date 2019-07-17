@@ -9,6 +9,11 @@ let userNameLocator = ".item-login .name";
 let searchInputLocator = "#searchbox";
 let searchFirstItemLocator = "#live-search > ul li:nth-of-type(1)";
 let searchResultLocator = ".cell-12 h1";
+let dachaSadLocator = `[class="level-1 dacha_sad"]`;
+let pumpsLocator = `[href*="/dacha_sad/nasosy-vodosnabzheniya/46036"]`;
+let pollFountainLocator = `[data-menu-id = "2952"]`;
+
+// eslint-disable-next-line no-undef
 let EC = protractor.ExpectedConditions;
 
 class MainPage extends BasePage {
@@ -30,6 +35,18 @@ class MainPage extends BasePage {
 
     getSearchResultFirstItem() {
         return new View(element(by.css(searchResultLocator)), "Search result first item");
+    }
+
+    getDachaSad() {
+        return new View(element(by.css(dachaSadLocator)), "Search Dacha Sad left menu item");
+    }
+
+    getPumps() {
+        return new Button(element(by.css(pumpsLocator)), "Pumps button in Dacha Sad menu");
+    }
+
+    getPollFountain() {
+        return new Button(element(by.css(pollFountainLocator)), "Poll, fountain button locator");
     }
 
     async open() {
@@ -63,6 +80,24 @@ class MainPage extends BasePage {
 
     async verifyFirstItemText() {
         return await allure.createStep("Verify that correct product found", async () => await this.getSearchResultFirstItem().getText())();
+    }
+
+    async hoverDachaSad() {
+        await allure.createStep("Hover Dacha Sad", async () => {
+            await browser.actions().mouseMove(this.getDachaSad().getProtractorElement()).perform();
+        })();
+    }
+
+    async clickPumps() {
+        await allure.createStep("Select Pumps menu item", async () => {
+            await this.getPumps().click();
+        })();
+    }
+
+    async clickPollFountain() {
+        await allure.createStep("Select Poll,Fountain menu item", async () => {
+            await this.getPollFountain().click();
+        })();
     }
 }
 
