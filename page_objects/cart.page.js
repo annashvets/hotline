@@ -6,7 +6,7 @@ let DropDown = require("../elements/drop.down.element");
 let wayOfDeliveryDropDown = `.form-item [class="field m_b-sm"]`;
 let novaPoshtaDropDownLocator = `.form-item [name="warehouseNP"]`;
 let orderButtonLocator = `.m_b-md .btn-blue`;
-let trashIconCartPageLocator = `[class="cell-12 m_b-lg"] div:nth-of-type(4) > div:nth-of-type(3) .delete`;
+let trashIconCartPageLocator = `[class="viewbox viewbox-striped"] div:nth-of-type(4) > i`;
 
 class CartPage extends BasePage {
     getWayOfDeliveryDroDown() {

@@ -1,14 +1,14 @@
 let BaseElement = require("./base.element");
+let Button = require("./button.element");
 
 class DropDown extends BaseElement {
     async open() {
         console.log(`Open drop-down ${this.elementName}`);
-        await this.protractorElement.click();
+        await this.click();
     }
 
     async selectItem(itemName) {
-        this.protractorElement = `//option[contains(., ${itemName})]`;
-        await element(by.xpath(this.protractorElement)).click();
+        await new Button(element(by.xpath(`//option[contains(., ${itemName})]`)), "Dop-down item").click();
     }
 }
 

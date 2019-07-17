@@ -13,9 +13,10 @@ let searchResultLocator = ".cell-12 h1";
 let cartIconLocator = ".item-cart .icon";
 let goodsCatalogLocator = `[class="menu-dropdown  pointer cell-sm"] > span`;
 let cartDeleteIconLocator = `[class="viewbox-striped border-t"] > ul li:nth-of-type(1) .delete`;
-let goToCartButtonLocator = `[class="dropdown-bd active"] .btn-graphite`;
+//`[class="viewbox-striped border-t"] li:nth-of-type(1) > i`;
+let goToCartButtonLocator = `[href="/cart/"]`;
 let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;
-let cartCounterLocator = ".item-cart .box-in .count";
+let cartCounterLocator = ".item-cart .box-in span";
 
 // eslint-disable-next-line no-undef
 let EC = protractor.ExpectedConditions;
@@ -111,6 +112,7 @@ class MainPage extends BasePage {
     }
 
     async clickDeleteIcon() {
+        await browser.wait(EC.visibilityOf(this.getCartDeleteIcon().getProtractorElement()), 6000);
         await allure.createStep("Click on first trash icon", async () => {
             await this.getCartDeleteIcon().click();
         })();
@@ -129,6 +131,7 @@ class MainPage extends BasePage {
     }
 
     async checkCartCounter() {
+        await browser.wait(EC.visibilityOf(this.getCartCounter().getProtractorElement()), 5000);
         await allure.createStep("Get cart counter number", async () => {
             await this.getCartCounter().getText();
         })();
