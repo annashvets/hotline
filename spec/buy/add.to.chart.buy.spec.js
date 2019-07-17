@@ -11,7 +11,7 @@ xdescribe("Hotline - Buy goods", () => {
         await mainPage.clickLoginButton();
         await loginPage.login("solovko_av@ukr.net", "0682326605");
         await loginPage.clickSubmit();
-        await productListPage.addToCart();
+        await productListPage.addToCart("3");
         await itemPage.clickBuyNowButton();
         await cartPage.openWayofDeliveryDropDown(`"До склада"`);
         await cartPage.openNovaPoshtaDropDown(`"Пластова"`);
