@@ -6,8 +6,9 @@ let DropDown = require("../elements/drop.down.element");
 let wayOfDeliveryDropDown = `.form-item [class="field m_b-sm"]`;
 let novaPoshtaDropDownLocator = `.form-item [name="warehouseNP"]`;
 let orderButtonLocator = `.m_b-md .btn-blue`;
+let trashIconCartPageLocator = `[class="cell-12 m_b-lg"] div:nth-of-type(4) > div:nth-of-type(3) .delete`;
 
-class BasketPage extends BasePage {
+class CartPage extends BasePage {
     getWayOfDeliveryDroDown() {
         return new DropDown(element(by.css(wayOfDeliveryDropDown)), "Way Of Delivery drop-down");
     }
@@ -18,6 +19,10 @@ class BasketPage extends BasePage {
 
     getOrderButton() {
         return new Button(element(by.css(orderButtonLocator)), "Order button");
+    }
+
+    getTrashIconCartPage() {
+        return new Button(element(by.css(trashIconCartPageLocator)), "Trash icon on Cart page");
     }
 
     async openWayofDeliveryDropDown(item) {
@@ -43,6 +48,12 @@ class BasketPage extends BasePage {
             );
         })();
     }
+
+    async clickTrashIcon() {
+        await allure.createStep("Click on Trash icon", async () => {
+            await this.getTrashIconCartPage().click();
+        })();
+    }
 }
 
-module.exports = new BasketPage();
+module.exports = new CartPage();

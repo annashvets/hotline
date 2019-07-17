@@ -3,15 +3,19 @@ let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
 let Input = require("../elements/input.element");
 let View = require("../elements/view.element");
+let DropDown = require("../elements/view.element");
 
 let loginButtonLocator = ".item-login a";
 let userNameLocator = ".item-login .name";
 let searchInputLocator = "#searchbox";
 let searchFirstItemLocator = "#live-search > ul li:nth-of-type(1)";
 let searchResultLocator = ".cell-12 h1";
-let dachaSadLocator = `[class="level-1 dacha_sad"]`;
-let pumpsLocator = `[href*="/dacha_sad/nasosy-vodosnabzheniya/46036"]`;
-let pollFountainLocator = `[data-menu-id = "2952"]`;
+let cartIconLocator = ".item-cart .icon";
+let goodsCatalogLocator = `[class="menu-dropdown  pointer cell-sm"] > span`;
+let cartDeleteIconLocator = `[class="viewbox-striped border-t"] > ul li:nth-of-type(1) .delete`;
+let goToCartButtonLocator = `[class="dropdown-bd active"] .btn-graphite`;
+let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;
+let cartCounterLocator = ".item-cart .box-in .count";
 
 // eslint-disable-next-line no-undef
 let EC = protractor.ExpectedConditions;
@@ -37,16 +41,28 @@ class MainPage extends BasePage {
         return new View(element(by.css(searchResultLocator)), "Search result first item");
     }
 
-    getDachaSad() {
-        return new View(element(by.css(dachaSadLocator)), "Search Dacha Sad left menu item");
+    getCartIcon() {
+        return new Button(element(by.css(cartIconLocator)), "Cart icon");
     }
 
-    getPumps() {
-        return new Button(element(by.css(pumpsLocator)), "Pumps button in Dacha Sad menu");
+    getGoodsCatalog() {
+        return new DropDown(element(by.css(goodsCatalogLocator)), "Goods Catalog drop-down");
     }
 
-    getPollFountain() {
-        return new Button(element(by.css(pollFountainLocator)), "Poll, fountain button locator");
+    getCartDeleteIcon() {
+        return new Button(element(by.css(cartDeleteIconLocator)), "First trash icon in cart");
+    }
+
+    getGoToCartButton() {
+        return new Button(element(by.css(goToCartButtonLocator)), "Go To Cart Button");
+    }
+
+    getHotlineLogo() {
+        return new Button(element(by.css(hotlineLogoLocator)), "Hotline logo");
+    }
+
+    getCartCounter() {
+        return new View(element(by.css(cartCounterLocator)), "Cart counter number");
     }
 
     async open() {
@@ -82,21 +98,39 @@ class MainPage extends BasePage {
         return await allure.createStep("Verify that correct product found", async () => await this.getSearchResultFirstItem().getText())();
     }
 
-    async hoverDachaSad() {
-        await allure.createStep("Hover Dacha Sad", async () => {
-            await browser.actions().mouseMove(this.getDachaSad().getProtractorElement()).perform();
+    async clickCartIcon() {
+        await allure.createStep("Click on Cart icon", async () => {
+            await this.getCartIcon().click();
         })();
     }
 
-    async clickPumps() {
-        await allure.createStep("Select Pumps menu item", async () => {
-            await this.getPumps().click();
+    async openGoodsCatalog() {
+        await allure.createStep("Click on Cart icon", async () => {
+            await this.getGoodsCatalog().click();
         })();
     }
 
-    async clickPollFountain() {
-        await allure.createStep("Select Poll,Fountain menu item", async () => {
-            await this.getPollFountain().click();
+    async clickDeleteIcon() {
+        await allure.createStep("Click on first trash icon", async () => {
+            await this.getCartDeleteIcon().click();
+        })();
+    }
+
+    async clickGoToCart() {
+        await allure.createStep("Click on GoToCart button", async () => {
+            await this.getGoToCartButton().click();
+        })();
+    }
+
+    async clickHotline() {
+        await allure.createStep("Click on Hotline logo", async () => {
+            await this.getHotlineLogo().click();
+        })();
+    }
+
+    async checkCartCounter() {
+        await allure.createStep("Get cart counter number", async () => {
+            await this.getCartCounter().getText();
         })();
     }
 }

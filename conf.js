@@ -20,7 +20,7 @@ exports.config = {
     maxInstances: 1,
     SELENIUM_PROMISE_MANAGER: false,
     onPrepare: async () => {
-        await browser.manage().setTimeouts({ implicit: 6000 });
+        await browser.manage().setTimeouts({ implicit: 5000 });
         await browser.waitForAngularEnabled(false);
         jasmine.getEnv().addReporter(new AllureReporter({
             resultsDir: 'allure-results'
