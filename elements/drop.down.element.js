@@ -8,8 +8,7 @@ class DropDown extends BaseElement {
     }
 
     async selectItem(itemName) {
-        this.protractorElement = `//option[contains(., ${itemName})]`;
-        await new Button(this.protractorElement, "Dop-down item");
+        await new Button(element(by.xpath(`//option[contains(., ${itemName})]`)), "Dop-down item").click();
     }
 }
 
