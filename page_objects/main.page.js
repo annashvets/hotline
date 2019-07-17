@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+
+//et webdriver = require('selenium-webdriver');
 let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
 let Input = require("../elements/input.element");
@@ -16,6 +18,11 @@ let cartDeleteIconLocator = `[class="viewbox-striped border-t"] > ul li:nth-of-t
 let goToCartButtonLocator = `[href="/cart/"]`;
 let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;
 let cartCounterLocator = ".item-cart .box-in span";
+let feedbackLinkLocator = `[data-navigation-id="app-footer-users"] > ul li:nth-of-type(5) a`;
+let ChooseFileButtonLocator = `.m_b-sm [type="file"]`;
+
+//let driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
+
 
 // eslint-disable-next-line no-undef
 let EC = protractor.ExpectedConditions;
@@ -63,6 +70,14 @@ class MainPage extends BasePage {
 
     getCartCounter() {
         return new View(element(by.css(cartCounterLocator)), "Cart counter number");
+    }
+
+    getFeedbackLink() {
+        return new Button(element(by.css(feedbackLinkLocator)), "Feedback link");
+    }
+
+    getChooseFileButton() {
+        return new Button(element(by.css(ChooseFileButtonLocator)), "Choose file button");
     }
 
     async open() {
@@ -133,6 +148,18 @@ class MainPage extends BasePage {
         await browser.wait(EC.visibilityOf(this.getCartCounter().getProtractorElement()), 5000);
         await allure.createStep("Get cart counter number", async () => {
             await this.getCartCounter().getText();
+        })();
+    }
+
+    async clickFeedbackLink() {
+        await allure.createStep("Click on Feedback link", async () => {
+            await this.getFeedbackLink().click();
+        })();
+    }
+
+    async selectFile(filePath) {
+        await allure.createStep("Click on Choose file button", async () => {
+            await browser.driver.findElement(by.css(`[type="file"]`)).sendKeys(filePath);
         })();
     }
 }

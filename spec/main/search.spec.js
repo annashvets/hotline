@@ -1,6 +1,6 @@
 const mainPage = require("../../page_objects/main.page");
 
-describe("Hotline Search", () => {
+xdescribe("Hotline Search", () => {
     it("Search product successfull", async () => {
         await mainPage.open();
         await mainPage.enterSerchProduct("Samsung Galaxy");

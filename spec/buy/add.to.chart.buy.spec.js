@@ -5,7 +5,7 @@ const itemPage = require("../../page_objects/item.page");
 const cartPage = require("../../page_objects/cart.page");
 const checkoutPage = require("../../page_objects/checkout.page");
 
-xdescribe("Hotline - Buy goods", () => {
+describe("Hotline - Buy goods", () => {
     it("Add to chart and buy", async () => {
         await mainPage.open();
         await mainPage.clickLoginButton();
