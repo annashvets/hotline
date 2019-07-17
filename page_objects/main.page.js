@@ -13,7 +13,6 @@ let searchResultLocator = ".cell-12 h1";
 let cartIconLocator = ".item-cart .icon";
 let goodsCatalogLocator = `[class="menu-dropdown  pointer cell-sm"] > span`;
 let cartDeleteIconLocator = `[class="viewbox-striped border-t"] > ul li:nth-of-type(1) .delete`;
-//`[class="viewbox-striped border-t"] li:nth-of-type(1) > i`;
 let goToCartButtonLocator = `[href="/cart/"]`;
 let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;
 let cartCounterLocator = ".item-cart .box-in span";

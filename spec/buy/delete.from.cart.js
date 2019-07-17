@@ -1,7 +1,7 @@
 const mainPage = require("../../page_objects/main.page");
 const productListPage = require("../../page_objects/products.list.page");
 const itemPage = require("../../page_objects/item.page");
-const cartPage = require("../../page_objects/cart.page");
+const cartPage = require("../../page_objects/cart.page.js");
 
 describe("Hotline - Buy goods", () => {
     it("Add to cart", async () => {
