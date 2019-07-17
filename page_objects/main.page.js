@@ -71,6 +71,12 @@ class MainPage extends BasePage {
         })();
     }
 
+    async openMenuItem(link) {
+        await allure.createStep(`Select ${link} menu item `, async () => {
+            await browser.get(link);
+        })();
+    }
+
     async clickLoginButton() {
         await allure.createStep("Click Login button", async () => {
             await this.getLoginButton().click();
