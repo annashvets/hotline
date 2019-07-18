@@ -5,6 +5,6 @@ describe("Hotline Footer", () => {
         await mainPage.open();
         await mainPage.clickFeedbackLink();
         await mainPage.selectFile("/Users/bob/Desktop/1.png");
-       // expect(await mainPage.verifyFirstItemText()).toContain("Samsung Galaxy");
+       // expect(await 
     });
 });

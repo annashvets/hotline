@@ -19,7 +19,7 @@ let goToCartButtonLocator = `[href="/cart/"]`;
 let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;
 let cartCounterLocator = ".item-cart .box-in span";
 let feedbackLinkLocator = `[data-navigation-id="app-footer-users"] > ul li:nth-of-type(5) a`;
-let ChooseFileButtonLocator = `.m_b-sm [type="file"]`;
+let ChooseFileButtonLocator = `[type="file"]`;
 
 //let driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
 
@@ -158,8 +158,8 @@ class MainPage extends BasePage {
     }
 
     async selectFile(filePath) {
-        await allure.createStep("Click on Choose file button", async () => {
-            await browser.driver.findElement(by.css(`[type="file"]`)).sendKeys(filePath);
+        await allure.createStep("Upload file", async () => {
+            await this.getChooseFileButton().sendKeys(filePath);
         })();
     }
 }
