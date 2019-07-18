@@ -80,7 +80,7 @@ class ProductsListPage extends BasePage {
 
     async enterMaxPrice(maxPrice) {
         await allure.createStep(`Enter min price - ${maxPrice}`, async () => {
-            await this.getMinPriceInput().clear();
+            await this.getMaxPriceInput().clear();
             await this.getMaxPriceInput().sendKeys(maxPrice);
         })();
     }
