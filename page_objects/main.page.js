@@ -11,7 +11,7 @@ let searchInputLocator = "#searchbox";
 let searchFirstItemLocator = "#live-search > ul li:nth-of-type(1)";
 let searchResultLocator = ".cell-12 h1";
 let cartIconLocator = ".item-cart .icon";
-let goodsCatalogLocator = `[class="menu-dropdown  pointer cell-sm"] > span`;
+let goodsCatalogLocator = `.menu-dropdown`;
 let cartDeleteIconLocator = `[class="viewbox-striped border-t"] > ul li:nth-of-type(1) .delete`;
 let goToCartButtonLocator = `[href="/cart/"]`;
 let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;

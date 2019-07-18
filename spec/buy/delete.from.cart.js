@@ -8,21 +8,11 @@ describe("Hotline - Buy goods", () => {
         await mainPage.open();
         await productListPage.addToCart("3");
         await itemPage.clickBuyNowButton();
-    });
-
-    it("Add to cart", async () => {
         await mainPage.openGoodsCatalog();
         await productListPage.addToCart("4");
         await itemPage.clickBuyNowButton();
-    });
-
-    it("Add to cart", async () => {
         await mainPage.openGoodsCatalog();
         await productListPage.addToCart("5");
-        await itemPage.clickBuyNowButton();
-    });
-
-    it("Add to cart", async () => {
         await mainPage.clickCartIcon();
         await mainPage.clickDeleteIcon();
         await mainPage.clickGoToCart();
