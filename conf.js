@@ -6,7 +6,7 @@ exports.config = {
     specs: ['spec/main/*.js'],
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30 * 1000
+        defaultTimeoutInterval: 50 * 1000
     },
 
     capabilities: {
