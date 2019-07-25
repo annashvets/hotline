@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 
-//et webdriver = require('selenium-webdriver');
 let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
 let Input = require("../elements/input.element");
@@ -13,16 +12,16 @@ let searchInputLocator = "#searchbox";
 let searchFirstItemLocator = "#live-search > ul li:nth-of-type(1)";
 let searchResultLocator = ".cell-12 h1";
 let cartIconLocator = ".item-cart .icon";
-let goodsCatalogLocator = `[class="menu-dropdown  pointer cell-sm"] > span`;
+let goodsCatalogLocator = `.menu-dropdown`;
 let cartDeleteIconLocator = `[class="viewbox-striped border-t"] > ul li:nth-of-type(1) .delete`;
-let goToCartButtonLocator = `[href="/cart/"]`;
+let goToCartButtonLocator = `[class="dropdown-bd active"] .m_b-md > a`;
 let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;
-let cartCounterLocator = ".item-cart .box-in span";
+let cartCounterLocator = ".item-cart .box-in > span";
 let feedbackLinkLocator = `[data-navigation-id="app-footer-users"] > ul li:nth-of-type(5) a`;
 let ChooseFileButtonLocator = `[type="file"]`;
-
-//let driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
-
+let cartAnimationLocator = ".dropdown.busy";
+let fileTypeErrorLocator = `[class="cell-7 cell-sm"] div:nth-of-type(2) > div:nth-of-type(2) [class="errors hidden"]`;
+let nextChooseFileButtonLocator = `[class="cell-7 cell-sm"] > div:nth-of-type(2) [type="file"]`;
 
 // eslint-disable-next-line no-undef
 let EC = protractor.ExpectedConditions;
@@ -61,7 +60,7 @@ class MainPage extends BasePage {
     }
 
     getGoToCartButton() {
-        return new Button(element(by.css(goToCartButtonLocator)), "Go To Cart Button");
+        return new Button(element(by.css(goToCartButtonLocator)), "GoToCart Button");
     }
 
     getHotlineLogo() {
@@ -77,7 +76,19 @@ class MainPage extends BasePage {
     }
 
     getChooseFileButton() {
-        return new Button(element(by.css(ChooseFileButtonLocator)), "Choose file button");
+        return new Input(element(by.css(ChooseFileButtonLocator)), "Choose file button");
+    }
+
+    getCartAnimation() {
+        return new View(element(by.css(cartAnimationLocator)), "Cart animation");
+    }
+
+    getNextChooseFileButton() {
+        return new Input(element(by.css(nextChooseFileButtonLocator)), "Choose file button");
+    }
+
+    getFileTypeError() {
+        return new View(element(by.css(fileTypeErrorLocator)), "Get file type error");
     }
 
     async open() {
@@ -114,19 +125,22 @@ class MainPage extends BasePage {
     }
 
     async clickCartIcon() {
+        await browser.wait(EC.visibilityOf(this.getCartAnimation().getProtractorElement()), 6000);
+        await browser.wait(EC.invisibilityOf(this.getCartAnimation().getProtractorElement()), 1000);
         await allure.createStep("Click on Cart icon", async () => {
             await this.getCartIcon().click();
         })();
     }
 
     async openGoodsCatalog() {
+        await browser.wait(EC.visibilityOf(this.getCartAnimation().getProtractorElement()), 3000);
+        await browser.sleep('2000');
         await allure.createStep("Click on Cart icon", async () => {
             await this.getGoodsCatalog().click();
         })();
     }
 
     async clickDeleteIcon() {
-        await browser.wait(EC.visibilityOf(this.getCartDeleteIcon().getProtractorElement()), 6000);
         await allure.createStep("Click on first trash icon", async () => {
             await this.getCartDeleteIcon().click();
         })();
@@ -145,10 +159,9 @@ class MainPage extends BasePage {
     }
 
     async checkCartCounter() {
-        await browser.wait(EC.visibilityOf(this.getCartCounter().getProtractorElement()), 5000);
-        await allure.createStep("Get cart counter number", async () => {
-            await this.getCartCounter().getText();
-        })();
+        await browser.wait(EC.visibilityOf(this.getCartAnimation().getProtractorElement()), 3000);
+        await browser.wait(EC.invisibilityOf(this.getCartAnimation().getProtractorElement()), 1000);
+        return await allure.createStep("Get cart counter number", async () => await this.getCartCounter().getText())();
     }
 
     async clickFeedbackLink() {
@@ -157,10 +170,27 @@ class MainPage extends BasePage {
         })();
     }
 
-    async selectFile(filePath) {
-        await allure.createStep("Upload file", async () => {
-            await this.getChooseFileButton().sendKeys(filePath);
+    async switchTab() {
+        await allure.createStep("Switch tab", async () => {
+            await browser.getAllWindowHandles().then(async (handles) => {
+                await browser.driver.switchTo().window(handles[1]);
+            });
         })();
+    }
+
+    async selectFile(filePath1, filePath2) {
+        await browser.getAllWindowHandles().then(async (handles) => {
+            await browser.driver.switchTo().window(handles[1]).then(async () => {
+                await allure.createStep("Upload file", async () => {
+                    await this.getChooseFileButton().sendKeys(filePath1);
+                    await this.getNextChooseFileButton().sendKeys(filePath2);
+                })();
+            });
+        });
+    }
+
+    async verifyFileTypeError() {
+        return await allure.createStep("Verify tfile type error", async () => await this.getFileTypeError().getText())();
     }
 }
 

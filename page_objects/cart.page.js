@@ -1,7 +1,10 @@
+/* eslint-disable no-undef */
 /* eslint-disable max-len */
 let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
 let DropDown = require("../elements/drop.down.element");
+
+let EC = protractor.ExpectedConditions;
 
 let wayOfDeliveryDropDown = `.form-item [class="field m_b-sm"]`;
 let novaPoshtaDropDownLocator = `.form-item [name="warehouseNP"]`;
@@ -50,6 +53,7 @@ class CartPage extends BasePage {
     }
 
     async clickTrashIcon() {
+        await browser.wait(EC.visibilityOf(this.getTrashIconCartPage().getProtractorElement()), 3000);
         await allure.createStep("Click on Trash icon", async () => {
             await this.getTrashIconCartPage().click();
         })();

@@ -3,10 +3,10 @@ const AllureReporter = require('jasmine-allure-reporter');
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['spec/main/*.js'],
+    specs: ['spec/**/*.js'],
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30 * 1000
+        defaultTimeoutInterval: 50 * 1000
     },
 
     capabilities: {
