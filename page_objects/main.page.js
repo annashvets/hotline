@@ -19,7 +19,7 @@ let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;
 let cartCounterLocator = ".item-cart .box-in > span";
 let feedbackLinkLocator = `[data-navigation-id="app-footer-users"] > ul li:nth-of-type(5) a`;
 let ChooseFileButtonLocator = `[type="file"]`;
-let cartAnimationLocator = ".dropdown.busy";
+let cartAnimationLocator = ".dropdown .busy";
 let fileTypeErrorLocator = `[class="cell-7 cell-sm"] div:nth-of-type(2) > div:nth-of-type(2) [class="errors hidden"]`;
 let nextChooseFileButtonLocator = `[class="cell-7 cell-sm"] > div:nth-of-type(2) [type="file"]`;
 
@@ -97,7 +97,7 @@ class MainPage extends BasePage {
         })();
     }
 
-    async openMenuItem(link) {
+    async openLink(link) {
         await allure.createStep(`Select ${link} menu item `, async () => {
             await browser.get(link);
         })();

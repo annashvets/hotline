@@ -1,6 +1,6 @@
 const mainPage = require("../../page_objects/main.page");
 
-describe("Hotline Footer", () => {
+xdescribe("Hotline Footer", () => {
     it("Send message", async () => {
         await mainPage.open();
         await mainPage.clickFeedbackLink();

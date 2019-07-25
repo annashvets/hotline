@@ -1,8 +1,11 @@
+/* eslint-disable no-undef */
 let BasePage = require("./base.page");
 let Button = require("../elements/button.element");
 let Checkbox = require("../elements/checkbox.element");
 let View = require("../elements/view.element");
 let Input = require("../elements/input.element");
+
+let EC = protractor.ExpectedConditions;
 
 let buyOnHotliheCheckboxLocator = ".sorting-in .type-checkbox";
 let dachaSadLocator = `[class="level-1 dacha_sad"]`;
@@ -11,8 +14,9 @@ let pollFountainLocator = `[data-menu-id = "2952"]`;
 let filterItemLocator = `[class="filters-item opened "] .item-bd > ul li:nth-of-type(21) [class="type-checkbox plus"]`;
 let minPriceInputLocator = ".price-slider-box input:nth-of-type(1)";
 let maxPriceInputLocator = ".price-slider-box input:nth-of-type(3)";
-let foundItemLocator = `.item-info [href="/tourism-snaryazhenie-dlya-alpinizma/petzl-rocpec-p26/"]`;
+let foundItemLocator = ".product-item .item-info a";
 let okButtonLocator = ".price-slider-box .btn-graphite";
+let loadAnimationLocator = `[class="cell-fixed-indent cell-md"] > div`;
 
 class ProductsListPage extends BasePage {
     getDachaSad() {
@@ -55,6 +59,10 @@ class ProductsListPage extends BasePage {
         return new Button(element(by.css(okButtonLocator)), "OK button");
     }
 
+    getLoadAnimation() {
+        return new View(element(by.css(loadAnimationLocator)), "Loading animation");
+    }
+
     async addToCart(itemNumber) {
         await allure.createStep("Add item to cart", async () => {
             await browser.actions().mouseMove(this.getDachaSad().getProtractorElement()).perform();
@@ -73,14 +81,18 @@ class ProductsListPage extends BasePage {
 
     async enterMinPrice(minPrice) {
         await allure.createStep(`Enter min price - ${minPrice}`, async () => {
-            await this.getMinPriceInput().clear();
+            await this.getMinPriceInput().sendKeys(protractor.Key.DELETE);
             await this.getMinPriceInput().sendKeys(minPrice);
         })();
     }
 
     async enterMaxPrice(maxPrice) {
         await allure.createStep(`Enter min price - ${maxPrice}`, async () => {
-            await this.getMaxPriceInput().clear();
+            await this.getMaxPriceInput().sendKeys(protractor.Key.DELETE);
+            await this.getMaxPriceInput().sendKeys(protractor.Key.DELETE);
+            await this.getMaxPriceInput().sendKeys(protractor.Key.DELETE);
+            await this.getMaxPriceInput().sendKeys(protractor.Key.DELETE);
+            await this.getMaxPriceInput().sendKeys(protractor.Key.DELETE);
             await this.getMaxPriceInput().sendKeys(maxPrice);
         })();
     }
@@ -92,9 +104,8 @@ class ProductsListPage extends BasePage {
     }
 
     async verifyFoundItem() {
-        await allure.createStep("Check found item", async () => {
-            await this.getFoundItem().getText();
-        })();
+        await browser.wait(EC.visibilityOf(this.getFoundItem().getProtractorElement()), 2000);
+        return await allure.createStep("Check found item", async () => await this.getFoundItem().getText())();
     }
 }
 
