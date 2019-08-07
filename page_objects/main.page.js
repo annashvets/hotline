@@ -176,14 +176,6 @@ class MainPage extends BasePage {
         })();
     }
 
-    async switchTab() {
-        await allure.createStep("Switch tab", async () => {
-            await browser.getAllWindowHandles().then(async (handles) => {
-                await browser.driver.switchTo().window(handles[1]);
-            });
-        })();
-    }
-
     async selectFile(filePath1, filePath2) {
         await browser.getAllWindowHandles().then(async (handles) => {
             await browser.driver.switchTo().window(handles[1]).then(async () => {
