@@ -3,10 +3,10 @@ const AllureReporter = require('jasmine-allure-reporter');
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['spec/buy/*.js'],
+    specs: ['spec/**/*.js'],
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30 * 1000
+        defaultTimeoutInterval: 50 * 1000
     },
 
     capabilities: {
@@ -20,7 +20,7 @@ exports.config = {
     maxInstances: 1,
     SELENIUM_PROMISE_MANAGER: false,
     onPrepare: async () => {
-        await browser.manage().setTimeouts({ implicit: 6000 });
+        await browser.manage().setTimeouts({ implicit: 5000 });
         await browser.waitForAngularEnabled(false);
         jasmine.getEnv().addReporter(new AllureReporter({
             resultsDir: 'allure-results'
