@@ -139,7 +139,7 @@ class MainPage extends BasePage {
     }
 
     async openGoodsCatalog() {
-        await browser.wait(EC.visibilityOf(this.getCartAnimation().getProtractorElement()), 3000);
+        await browser.wait(EC.invisibilityOf(this.getCartAnimation().getProtractorElement()), 3000);
         await browser.sleep('2000');
         await allure.createStep("Click on Cart icon", async () => {
             await this.getGoodsCatalog().click();
@@ -172,7 +172,11 @@ class MainPage extends BasePage {
 
     async clickFeedbackLink() {
         await allure.createStep("Click on Feedback link", async () => {
-            await this.getFeedbackLink().click();
+            await browser.executeScript("arguments[0].scrollIntoView()", this.getFeedbackLink().getProtractorElement()).then(
+                async () => {
+                    await this.getFeedbackLink().click();
+                }
+            );
         })();
     }
 
