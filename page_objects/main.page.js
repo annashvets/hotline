@@ -19,7 +19,7 @@ let hotlineLogoLocator = `[class="header-logo cell-4 cell-sm-6 cell-xs"] > a`;
 let cartCounterLocator = ".item-cart .box-in > span";
 let feedbackLinkLocator = `[data-navigation-id="app-footer-users"] > ul li:nth-of-type(5) a`;
 let ChooseFileButtonLocator = `[type="file"]`;
-let cartAnimationLocator = ".dropdown.busy";
+let cartAnimationLocator = ".dropdown .busy";
 let fileTypeErrorLocator = `[class="cell-7 cell-sm"] div:nth-of-type(2) > div:nth-of-type(2) [class="errors hidden"]`;
 let nextChooseFileButtonLocator = `[class="cell-7 cell-sm"] > div:nth-of-type(2) [type="file"]`;
 
@@ -97,6 +97,12 @@ class MainPage extends BasePage {
         })();
     }
 
+    async openLink(link) {
+        await allure.createStep(`Select ${link} menu item `, async () => {
+            await browser.get(link);
+        })();
+    }
+
     async clickLoginButton() {
         await allure.createStep("Click Login button", async () => {
             await this.getLoginButton().click();
@@ -133,7 +139,7 @@ class MainPage extends BasePage {
     }
 
     async openGoodsCatalog() {
-        await browser.wait(EC.visibilityOf(this.getCartAnimation().getProtractorElement()), 3000);
+        await browser.wait(EC.invisibilityOf(this.getCartAnimation().getProtractorElement()), 3000);
         await browser.sleep('2000');
         await allure.createStep("Click on Cart icon", async () => {
             await this.getGoodsCatalog().click();
@@ -166,15 +172,11 @@ class MainPage extends BasePage {
 
     async clickFeedbackLink() {
         await allure.createStep("Click on Feedback link", async () => {
-            await this.getFeedbackLink().click();
-        })();
-    }
-
-    async switchTab() {
-        await allure.createStep("Switch tab", async () => {
-            await browser.getAllWindowHandles().then(async (handles) => {
-                await browser.driver.switchTo().window(handles[1]);
-            });
+            await browser.executeScript("arguments[0].scrollIntoView()", this.getFeedbackLink().getProtractorElement()).then(
+                async () => {
+                    await this.getFeedbackLink().click();
+                }
+            );
         })();
     }
 
