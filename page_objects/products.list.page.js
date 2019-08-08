@@ -104,7 +104,7 @@ class ProductsListPage extends BasePage {
     }
 
     async verifyFoundItem() {
-        await browser.wait(EC.invisibilityOf(this.getLoadingAnimation().getProtractorElement()), 1000);
+        await browser.wait(EC.invisibilityOf(this.getLoadingAnimation().getProtractorElement()), 3000);
         return await allure.createStep("Check found item", async () => await this.getFoundItem().getText())();
     }
 }

@@ -6,13 +6,15 @@ const cartPage = require("../../page_objects/cart.page");
 const checkoutPage = require("../../page_objects/checkout.page");
 
 describe("Hotline - Buy goods", () => {
+
     it("Add to chart and buy", async () => {
         await mainPage.open();
         await mainPage.clickLoginButton();
         await loginPage.login("solovko_av@ukr.net", "0682326605");
         await loginPage.clickSubmit();
-        await productListPage.addToCart("3");
+        await productListPage.addToCart(3);
         await itemPage.clickBuyNowButton();
+        await mainPage.waitCartAnimation();
         await cartPage.openWayofDeliveryDropDown(`"До склада"`);
         await cartPage.openNovaPoshtaDropDown(`"Пластова"`);
         await cartPage.clickOrderButton();
